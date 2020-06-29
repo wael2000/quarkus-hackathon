@@ -1,0 +1,14 @@
+package org.acme.kogito
+
+import org.acme.kogito.model.Request;
+
+
+rule "Is physician assigned" ruleflow-group "request"
+
+when
+    $request: Request(physician != null)
+then
+    modify($request) { 
+    	setStatus("Assigned") 
+    };
+end
