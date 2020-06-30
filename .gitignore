@@ -1,2 +1,3 @@
 data
 import-mongodb.json
+.gitignore
