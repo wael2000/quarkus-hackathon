@@ -43,12 +43,12 @@
         <artifactId>quarkus-rest-client</artifactId>
     </dependency>
     
+    <!-- 
     <dependency>
       <groupId>org.acme</groupId>
       <artifactId>physicians</artifactId>
       <version>1.0.0-SNAPSHOT</version>
     </dependency>
-
     <dependency>
       <groupId>org.acme</groupId>
       <artifactId>cases</artifactId>
@@ -59,7 +59,17 @@
       <artifactId>bp</artifactId>
       <version>1.0.0-SNAPSHOT</version>
     </dependency>
-
+    -->
+    
+    <dependency>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-openshift</artifactId>
+    </dependency>
+    
+    <dependency>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-container-image-s2i</artifactId>
+    </dependency>
     
 
     <dependency>

@@ -1,10 +1,12 @@
 package org.acme.composite.resources;
 
-import java.util.Set;
+import java.util.List;
+import java.util.Map;
 import java.util.concurrent.CompletionStage;
 
 import javax.inject.Inject;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
@@ -35,8 +37,23 @@ public class ProfileResource {
     @Produces(MediaType.APPLICATION_JSON)
     public PhysicianProfile getPhysician(@PathParam String id){
         PhysicianProfile physicianProfile = physicianService.getPhysician(id);
-        physicianProfile.cases =  medicalCaseService.getCases(physicianProfile.id);
+        physicianProfile.cases =  medicalCaseService.getPhysicialCases(physicianProfile.id);
         return physicianProfile;
     }
+
+    @POST
+    @Path("/nearBy/{distance}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<PhysicianProfile> nearBy(@PathParam("distance") Double distance,Map params){
+        return physicianService.nearBy( distance, params);
+    }
+
+    @GET
+    @Path("/")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<PhysicianProfile> list(){
+        return physicianService.list();
+    }
+
    
 }

@@ -73,7 +73,7 @@
           
           function _refreshPageData() {
             var method = "GET";
-            var url = 'http://localhost:8082/profile/' + urlParams.get("id");
+            var url = 'http://composite-quarkus.myclusterabduhan1-88e9887841c920692019c4a22b0513af-0000.us-south.containers.appdomain.cloud/profile/' + urlParams.get("id");
             $http({
               method: method,
               url: url,
@@ -94,7 +94,7 @@
             var data = {};
             if ($scope.form.actionid == -1) {
               method = "POST";
-              url = 'http://localhost:8082/cases';
+              url = 'http://composite-quarkus.myclusterabduhan1-88e9887841c920692019c4a22b0513af-0000.us-south.containers.appdomain.cloud/cases';
               data = $scope.form;
             } else {
               method = "PUT";
@@ -167,9 +167,11 @@
                 <li class="nav-item">
                   <a class="nav-link" href="knowledge.html">Knowedge</a>
                 </li>
+                <!--
                 <li>
                   <a class="nav-link" href="http://localhost:8180/auth/realms/quarkus/protocol/openid-connect/logout?redirect_uri=http://localhost:8080/">Logout</a>
                 </li>
+                -->
               </ul>  
              
           </div>

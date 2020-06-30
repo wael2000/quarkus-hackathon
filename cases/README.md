@@ -32,6 +32,22 @@ You can then execute your native executable with: `./target/quarkus-getting-star
 
 If you want to learn more about building native executables, please consult https://quarkus.io/guides/building-native-image.
 
+
+
+# build OCP app
+# To build the image on OpenShift
+oc new-app registry.access.redhat.com/ubi8/openjdk-11:latest~https://github.com/wael2000/quarkus-hackathon.git --context-dir=cases --name=cases
+
+oc logs -f bc/cases
+
+# To create the route
+oc expose svc/quarkus-quickstart
+
+# Get the route URL
+export URL="http://$(oc get route | grep quarkus-quickstart | awk '{print $2}')"
+curl $URL/hello/greeting/quarkus
+
+
 To test the application 
 
 

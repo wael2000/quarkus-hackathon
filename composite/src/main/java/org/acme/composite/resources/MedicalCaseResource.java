@@ -1,6 +1,6 @@
 package org.acme.composite.resources;
 
-import java.util.Set;
+import java.util.List;
 import java.util.concurrent.CompletionStage;
 
 import javax.inject.Inject;
@@ -19,6 +19,7 @@ import org.acme.composite.service.MedicalCaseService;
 import org.acme.composite.service.ProcessService;
 import org.acme.composite.model.PhysicianProfile;
 import org.acme.model.MedicalCase;
+import org.acme.model.Report;
 import org.acme.kogito.model.Request;
 import org.acme.composite.model.CaseRequest;
 
@@ -36,6 +37,14 @@ public class MedicalCaseResource {
     @RestClient
     ProcessService processService;
 
+
+    @GET
+    @Path("/")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<MedicalCase> getcases(){
+        return medicalCaseService.getcases();
+    }
+    
     @POST
     @Path("/")
     @Produces(MediaType.APPLICATION_JSON)
@@ -47,7 +56,6 @@ public class MedicalCaseResource {
         request.setId(savedMedicalCase.getId());
         caseRequest.request = request;
         caseRequest = processService.startProcess(caseRequest);
-        System.out.println(caseRequest);
         return savedMedicalCase;
         //return medicalCaseService.createCase(medicalCase);
     }

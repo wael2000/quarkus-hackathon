@@ -18,11 +18,17 @@ import org.acme.model.MedicalCase;
 @Path("/cases")
 @RegisterRestClient
 public interface MedicalCaseService {
-
+    
     @GET
     @Path("/physician/{id}")
     @Produces("application/json")
-    List<MedicalCase> getCases(@PathParam String id);   
+    List<MedicalCase> getPhysicialCases(@PathParam String id);   
+    
+    
+    @GET
+    @Path("/")
+    @Produces("application/json")
+    List<MedicalCase> getcases();   
 
     @POST
     @Path("/")

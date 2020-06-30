@@ -1,0 +1,5 @@
+"/Users/redhat/Documents/maven/apache-maven-3.6.3/bin/mvn" quarkus:dev -f "/Users/redhat/Documents/microservices/quarkus-code/hackathon/physicians/pom.xml" 
+"/Users/redhat/Documents/maven/apache-maven-3.6.3/bin/mvn" quarkus:dev -f "/Users/redhat/Documents/microservices/quarkus-code/hackathon/cases/pom.xml" 
+"/Users/redhat/Documents/maven/apache-maven-3.6.3/bin/mvn" quarkus:dev -f "/Users/redhat/Documents/microservices/quarkus-code/hackathon/bp/pom.xml" 
+"/Users/redhat/Documents/maven/apache-maven-3.6.3/bin/mvn" quarkus:dev -f "/Users/redhat/Documents/microservices/quarkus-code/hackathon/composite/pom.xml"
+# "/Users/redhat/Documents/maven/apache-maven-3.6.3/bin/mvn" quarkus:dev -f "/Users/redhat/Documents/microservices/quarkus-code/hackathon/ui/pom.xml"

@@ -1,9 +1,11 @@
 package org.acme.composite.service;
 
-import java.util.Set;
+import java.util.List;
+import java.util.Map;
 import java.util.concurrent.CompletionStage;
 
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 
@@ -23,6 +25,14 @@ public interface PhysicianService {
     @Produces("application/json")
     PhysicianProfile getPhysician(@PathParam String id);
     
+    @POST
+    @Path("/nearBy/{distance}")
+    public List<PhysicianProfile> nearBy(@PathParam("distance") Double distance,Map params);
+
+    @GET
+    @Path("/")
+    public List<PhysicianProfile> list();
+
     /**
     @GET
     @Path("/name/{name}")
