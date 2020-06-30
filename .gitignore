@@ -1,4 +1,4 @@
 data
 import-mongodb.json
 .gitignore
-.DS_Store1
+.DS_Store
