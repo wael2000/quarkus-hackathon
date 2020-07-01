@@ -8,25 +8,13 @@
     <link rel="stylesheet" href="css/styles.css"/>
     <link rel="stylesheet" href="css/amsify.select.css"/>
     
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
-    integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
-    crossorigin=""/>
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-
     <!--<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>-->
 
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    
-
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="js/jquery.amsifyselect.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
-    <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
-    integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
-    crossorigin=""></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
-    
     <style>
         .card-img-top{
             margin-top: 10px;
@@ -42,73 +30,11 @@
           cursor: pointer;
         }
         .fixedHeight{
-          height: 100px;overflow-y: scroll;max-height:50px;  
-        }   
+          height: 300px;overflow-y: scroll;max-height:300px;  
+        }        
     </style>
     <script type="text/javascript">
-        var mymap;
-        var circle;
-        var layerGroup;
-        var latitude=25.1973 , longitude=55.2793, raduis=100; //KM
-        var origin;
-        var originLayerGroup;
-
-        function newCase(physician){
-          window.location = 'case.html?id=' + physician;
-        }
-
         $.when( $.ready ).then(function() {
-          mymap = L.map('myMap').setView([latitude, longitude], 8);
-          L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1Ijoid2FlbGVsZG9hbWlyeSIsImEiOiJja2J0OWpmdTYwN3QxMnJvMHNnMzlucnRsIn0.YW_GzkfI16jR_bWwT9NhcQ', {
-              attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-              maxZoom: 18,
-              id: 'mapbox/streets-v11',
-              tileSize: 512,
-              zoomOffset: -1,
-              accessToken: 'your.mapbox.access.token'
-          }).addTo(mymap);
-          layerGroup = L.layerGroup().addTo(mymap);
-          originLayerGroup = L.layerGroup().addTo(mymap);
-          circle = L.circle([latitude, longitude], {
-              color: 'red',
-              fillColor: '#f03',
-              fillOpacity: 0.1,
-              radius: raduis*1000 // KM to M
-          }).addTo(mymap);
-          //slider
-          $( "#slider-vertical" ).slider({
-            orientation: "vertical",
-            range: "min",
-            min: 0,
-            max: 150,
-            value: raduis,
-            slide: function( event, ui ) {
-              $( "#amount" ).val( ui.value );
-              raduis = ui.value;
-              circle.setRadius(raduis*1000);
-            }
-          });
-          $( "#amount" ).val( $( "#slider-vertical" ).slider( "value" ) );
-
-          mymap.on('click', function(ev) {
-              //alert(ev.latlng); // ev is an event object (MouseEvent in this case)
-              latitude = ev.latlng.lat;
-              longitude = ev.latlng.lng;
-              originLayerGroup.clearLayers();
-              circle.remove();
-              L.marker(ev.latlng).addTo(originLayerGroup)
-                    .bindPopup("Origin")
-                    .openPopup();
-              circle = L.circle(ev.latlng, {
-                  color: 'red',
-                  fillColor: '#f03',
-                  fillOpacity: 0.1,
-                  radius: raduis*1000 // KM to M
-              }).addTo(mymap);
-          });
-
-
-
         });
         
         var app = angular.module("PhysicianManagement", []);
@@ -117,17 +43,15 @@
               return myString.substring(0,myLength);
           }
           $scope.physicians = [];
-          //_refreshPageData(latitude,longitude,["Oncology"]);
+          //_refreshPageData(null,null,[""]);
 
           function _refreshPageData(latitude,longitude,speciality) {
             var method = "";
             var url = "";
             var data = {};
             method = "POST";
-            url = 'http://composite-quarkus.myclusterabduhan1-88e9887841c920692019c4a22b0513af-0000.us-south.containers.appdomain.cloud/profile/nearBy/' + raduis;
+            url = '{composite}/profile/nearBy/1000';
             data.speciality = speciality;
-            data.latitude = latitude;
-            data.longitude =longitude;
             $http({
               method: method,
               url: url,
@@ -137,32 +61,16 @@
                 'Access-Control-Allow-Origin' : '*'
               }
             }).then(function successCallback(response) {
-              _success(response);
+              $scope.physicians = response.data;
             }, function errorCallback(response) {
               console.log(response.statusText);
             });
           }  
-          function _success(response) {
-            $scope.physicians = response.data;
-            for(var index in $scope.physicians){
-              var physician = $scope.physicians[index];
-              if(physician.address){
-                var popupContent = $("#physiciantemplate").html();
-                popupContent = popupContent.replace(/physician.id/g,physician.id);
-                popupContent= popupContent.replace(/physician.name/g,physician.name);
-                popupContent= popupContent.replace(/physician.speciality/g,physician.speciality);
-                popupContent= popupContent.replace(/physician.qualifications/g,physician.qualifications);                
-                L.marker(physician.address.location.coordinates).addTo(layerGroup)
-                    .bindPopup(popupContent)
-                    .openPopup();
-              }
-            }
-          }
           $scope.search = function (){
-            layerGroup.clearLayers();
-            _refreshPageData(latitude,longitude,$("#speciality").val());
+            _refreshPageData(null,null,$("#speciality").val());          
           }
         });
+        
       </script>
 </head>
 <body ng-app="PhysicianManagement" ng-controller="PhysicianManagementController">
@@ -180,23 +88,26 @@
 
         <section class="jumbotron text-center">
           <div class="container clearfix">
-            <ul class="nav nav-pills float-left">
+              <ul class="nav nav-pills float-left">
                 <li class="nav-item">
-                  <a class="nav-link" href="index.html">Directory</a>
+                  <a class="nav-link active" href="#">Directory</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link active" href="#">NearBy</a>
+                  <a class="nav-link" href="nearby">NearBy</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="case.html">New Case</a>
+                  <a class="nav-link" href="case">New Case</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="cases.html">My Cases</a>
+                  <a class="nav-link" href="cases">My Cases</a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="knowledge.html">Knowedge</a>
                 </li>
               </ul>  
+              <span class="btn btn-success float-right">
+                {username}
+              </span>
           </div>
         </section>
   
@@ -209,7 +120,7 @@
                     Phsician Directory
                 </div>
                 <div class="col-md-8">
-                <select style="z-index: 10000;" name="speciality" id="speciality" class="form-control" multiple searchable>
+                <select name="speciality" id="speciality" class="form-control" multiple searchable>
                   <option>Addiction Medicine</option>
                   <option>Allergy</option>
                   <option>Anesthesiology</option>
@@ -337,33 +248,91 @@
                 </div>
 
             </div>
+
             <div class="row">
 
-              
-              <div class="container col-md-10">
-                <div id="myMap" style="width: 100%; height: 480px;"></div>
-              </div>
-              <div class="col-md-2">
-                <p>
-                  <input type="text" id="amount" readonly style="border:0; color:#f6931f; font-weight:bold;">
-                </p>
-                <div id="slider-vertical" style="height:250px;"></div>
-              </div>
-
-            <div id="physiciantemplate" style="display: none;">
-              <div class="card">                
-                <img src="img/physician.id.jpg"  class="w-75 rounded-circle card-img-top shadow-sm bg-white p-1 mb-1 rounded" alt="..." >
-                <div class="card-body">
-                  <h5 class="card-title text-capitalize">physician.name</h5>
-                  <p class="card-text small">
-                    <smal>physician.qualifications</smal> <br/>
-                    <smal>physician.speciality</smal>
-                </p>
-                <button class="btn btn-info btn-sm" onclick="newCase('physician.id')">new case</button>
-                </div>
-              </div>        
-            </div>  
+            <div class="col-md-6" ng-repeat="physician in physicians">
+            <div class="card bg-light mb-3">
+                <div class="row no-gutters">
+                  <div class="col-md-4 text-center small">
+                    <img src="img/{{physician.id}}.jpg" class="rounded-circle card-img-top shadow-sm bg-white p-1 mb-1 rounded" alt="..." >
+                    <span class="mx-auto badge badge-info" ng-repeat="speciality in physician.speciality">
+                        {{ speciality }} 
+                    </span> 
+                    <hr/>
+                    <span class="mx-auto badge badge-dark">
+                      {{ physician.qualifications }}
+                    </span>
+                    <hr/>
+                    <div>
+                      <a class="btn btn-info btn-sm" href="case?id={{physician.id}}">new case</a>
+                    </div>
+                  </div>
+                  <div class="col-md-8">
+                    <div class="card-body">
+                      <center><h5 class="card-title shadow-sm bg-light p-1 mb-1 rounded">{{ physician.name }}</h5></center>
+                      <div class="card-text fixedHeight"> 
+                          
+                        <div class="accordion" id="accordion{{$index}}">
+                          <div class="card">
+                            <div class="card-header" id="headingOne">
+                              <span class="badge badge-primary header" 
+                              data-toggle="collapse" data-target="#collapseOne{{$index}}" aria-expanded="true" aria-controls="collapseOne{{$index}}">
+                              Education</span>
+                            </div>
                         
+                            <div id="collapseOne{{$index}}" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion{{$index}}">
+                              <div class="card-body">
+                                <small  ng-repeat="education in physician.education" >
+                                  <li> {{stripString(education,200)}} </li>
+                                </small>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div class="card">
+                            <div class="card-header" id="headingTwo">
+                              <span class="badge badge-danger header" 
+                              data-toggle="collapse" data-target="#collapseTwo{{$index}}" aria-expanded="true" aria-controls="collapseTwo{{$index}}">
+                              Experience
+                              </span>
+                            </div>
+                            <div id="collapseTwo{{$index}}" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion{{$index}}">
+                              <div class="card-body">
+                                  <small  ng-repeat="experience in physician.experience" >
+                                      <li> {{stripString(experience,200)}} </li>
+                                  </small>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div class="card">
+                            <div class="card-header" id="headingThree">
+                              <span class="badge badge-success header" 
+                              data-toggle="collapse" data-target="#collapseThree{{$index}}" aria-expanded="true" aria-controls="collapsThree{{$index}}">
+                              Expertise
+                              </span>
+                              </h5>
+                            </div>
+                            <div id="collapseThree{{$index}}" class="collapse" aria-labelledby="headingThree" data-parent="#accordion{{$index}}">
+                              <div class="card-body">
+                                <small ng-repeat="expertise in physician.expertise" >
+                                  <li> {{stripString(expertise,200)}} </li>
+                              </small>
+                              </div>
+                            </div>
+                          </div>
+                        </div>    
+ 
+                            
+                        </div>
+                    </div>
+                    
+                  </div>
+                </div>
+            </div>
+            </div>
+          
             </div>
           </div>
       </main>

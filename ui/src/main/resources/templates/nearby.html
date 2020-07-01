@@ -43,7 +43,12 @@
         }
         .fixedHeight{
           height: 100px;overflow-y: scroll;max-height:50px;  
-        }   
+        } 
+        .center {
+          display: block;
+          margin-left: auto;
+          margin-right: auto;
+        }  
     </style>
     <script type="text/javascript">
         var mymap;
@@ -54,12 +59,13 @@
         var originLayerGroup;
 
         function newCase(physician){
-          window.location = 'case.html?id=' + physician;
+          window.location = 'case?id=' + physician;
         }
 
         $.when( $.ready ).then(function() {
           mymap = L.map('myMap').setView([latitude, longitude], 8);
-          L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1Ijoid2FlbGVsZG9hbWlyeSIsImEiOiJja2J0OWpmdTYwN3QxMnJvMHNnMzlucnRsIn0.YW_GzkfI16jR_bWwT9NhcQ', {
+          //L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1Ijoid2FlbGVsZG9hbWlyeSIsImEiOiJja2J0OWpmdTYwN3QxMnJvMHNnMzlucnRsIn0.YW_GzkfI16jR_bWwT9NhcQ', {
+            L.tileLayer('https://api.mapbox.com/styles/v1/\{id\}/tiles/\{z\}/\{x\}/\{y\}?access_token=pk.eyJ1Ijoid2FlbGVsZG9hbWlyeSIsImEiOiJja2J0OWpmdTYwN3QxMnJvMHNnMzlucnRsIn0.YW_GzkfI16jR_bWwT9NhcQ', {
               attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
               maxZoom: 18,
               id: 'mapbox/streets-v11',
@@ -124,7 +130,7 @@
             var url = "";
             var data = {};
             method = "POST";
-            url = 'http://composite-quarkus.myclusterabduhan1-88e9887841c920692019c4a22b0513af-0000.us-south.containers.appdomain.cloud/profile/nearBy/' + raduis;
+            url = '{composite}/profile/nearBy/' + raduis;
             data.speciality = speciality;
             data.latitude = latitude;
             data.longitude =longitude;
@@ -180,23 +186,26 @@
 
         <section class="jumbotron text-center">
           <div class="container clearfix">
-            <ul class="nav nav-pills float-left">
+              <ul class="nav nav-pills float-left">
                 <li class="nav-item">
-                  <a class="nav-link" href="index.html">Directory</a>
+                  <a class="nav-link" href="home">Directory</a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link active" href="#">NearBy</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="case.html">New Case</a>
+                  <a class="nav-link" href="case">New Case</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="cases.html">My Cases</a>
+                  <a class="nav-link" href="cases">My Cases</a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="knowledge.html">Knowedge</a>
                 </li>
               </ul>  
+              <span class="btn btn-success float-right">
+                {username}
+              </span>
           </div>
         </section>
   
@@ -351,11 +360,11 @@
               </div>
 
             <div id="physiciantemplate" style="display: none;">
-              <div class="card">                
-                <img src="img/physician.id.jpg"  class="w-75 rounded-circle card-img-top shadow-sm bg-white p-1 mb-1 rounded" alt="..." >
-                <div class="card-body">
+              <div class="card">
+                <img src="img/physician.id.jpg"  class="center w-75 rounded-circle card-img-top shadow-sm bg-white rounded" alt="..." >
+                <div class="card-body" style="padding-top:0em">
                   <h5 class="card-title text-capitalize">physician.name</h5>
-                  <p class="card-text small">
+                  <p class="small">
                     <smal>physician.qualifications</smal> <br/>
                     <smal>physician.speciality</smal>
                 </p>

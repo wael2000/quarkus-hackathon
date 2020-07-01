@@ -23,6 +23,8 @@ import org.acme.model.Report;
 import org.acme.kogito.model.Request;
 import org.acme.composite.model.CaseRequest;
 
+
+
 @Path("/cases")
 public class MedicalCaseResource {
     @Inject
@@ -38,13 +40,28 @@ public class MedicalCaseResource {
     ProcessService processService;
 
 
+
     @GET
     @Path("/")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<MedicalCase> getcases(){
+    public List<MedicalCase> getCases(){
         return medicalCaseService.getcases();
     }
+
+    @GET
+    @Path("/process/{id}")
+    @Produces("application/json")
+    public CaseRequest getProcess(@PathParam String id){
+        return processService.getProcess(id);
+    }
     
+    @GET
+    @Path("/my")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<MedicalCase> myCases(){
+        return medicalCaseService.myCases("alice");
+    }
+
     @POST
     @Path("/")
     @Produces(MediaType.APPLICATION_JSON)
@@ -56,6 +73,8 @@ public class MedicalCaseResource {
         request.setId(savedMedicalCase.getId());
         caseRequest.request = request;
         caseRequest = processService.startProcess(caseRequest);
+        savedMedicalCase.setProcessId(caseRequest.id);
+        medicalCaseService.updateCase(savedMedicalCase.getId(),savedMedicalCase);
         return savedMedicalCase;
         //return medicalCaseService.createCase(medicalCase);
     }

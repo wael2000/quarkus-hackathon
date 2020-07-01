@@ -21,6 +21,11 @@ public class MedicalCase {
     private String postDICOMURL;
     private String postDICOMPWD;
 
+    private String username;
+
+    private String processId;
+
+
     private List<Report> reports;
 
     public Integer getId() {
@@ -127,5 +132,20 @@ public class MedicalCase {
         this.postDICOMPWD = postDICOMPWD;
     }
     
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getProcessId() {
+		return processId;
+	}
+
+	public void setProcessId(String processId) {
+		this.processId = processId;
+	}
     
 }

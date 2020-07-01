@@ -15,11 +15,13 @@ import javax.persistence.FetchType;
 import javax.persistence.CascadeType;
 import java.util.Date;
 import java.util.List;
+import java.util.ArrayList;
 
 @Entity
 @Table(name="medicalcase")
 @NamedQuery(name = "Cases.findAll", query = "SELECT c FROM MedicalCase c ORDER BY c.date", hints = @QueryHint(name = "org.hibernate.cacheable", value = "true"))
 @NamedQuery(name = "Cases.findByPhysician", query = "SELECT c FROM MedicalCase c where c.physician=:physician ORDER BY c.date", hints = @QueryHint(name = "org.hibernate.cacheable", value = "true"))
+@NamedQuery(name = "Cases.findByUsername", query = "SELECT c FROM MedicalCase c where c.username=:username ORDER BY c.date", hints = @QueryHint(name = "org.hibernate.cacheable", value = "true"))
 @Cacheable
 public class MedicalCase {
 
@@ -40,6 +42,10 @@ public class MedicalCase {
 
     private String postDICOMURL;
     private String postDICOMPWD;
+
+    private String username;
+
+    private String processId;
 
     @OneToMany(mappedBy = "medicalCase", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private List<Report> reports;
@@ -117,7 +123,7 @@ public class MedicalCase {
     }
 
     public List<Report> getReports() {
-        return reports;
+        return reports!=null?reports:new ArrayList<Report>();
     }
 
     public void setReports(List<Report> reports) {
@@ -128,6 +134,22 @@ public class MedicalCase {
         return physician;
     }
 
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+
+	public String getProcessId() {
+		return processId;
+	}
+
+	public void setProcessId(String processId) {
+		this.processId = processId;
+	}
     public void setPhysician(String physician) {
         this.physician = physician;
     }
@@ -147,6 +169,8 @@ public class MedicalCase {
     public void setPostDICOMPWD(String postDICOMPWD) {
         this.postDICOMPWD = postDICOMPWD;
     }
+
+    
     
     
 }

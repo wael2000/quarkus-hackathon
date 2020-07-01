@@ -24,4 +24,11 @@ public interface ProcessService {
     @Produces("application/json")
     public CaseRequest startProcess(CaseRequest request);
 
+    @GET
+    @Path("/{id}")
+    @Produces("application/json")
+    public CaseRequest getProcess(@PathParam String id);
+
+
+
 }

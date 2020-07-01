@@ -5,6 +5,7 @@ import java.util.concurrent.CompletionStage;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 
@@ -30,9 +31,20 @@ public interface MedicalCaseService {
     @Produces("application/json")
     List<MedicalCase> getcases();   
 
+    @GET
+    @Path("/my/{username}")
+    @Produces("application/json")
+    List<MedicalCase> myCases(@PathParam String username);   
+
     @POST
     @Path("/")
     @Produces("application/json")
     public MedicalCase createCase(MedicalCase medicalCase);
+
+    
+    @PUT
+    @Path("/{id}")
+    @Produces("application/json")
+    public MedicalCase updateCase(@PathParam Integer id,MedicalCase medicalCase);
 
 }

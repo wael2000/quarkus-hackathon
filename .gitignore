@@ -2,3 +2,5 @@ data
 import-mongodb.json
 .gitignore
 .DS_Store
+mongodb-panache-quickstart
+mongodb-quickstart

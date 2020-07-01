@@ -33,6 +33,13 @@ public class MedicalCaseController {
     }
 
     @GET
+    @Path("/my/{username}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public MedicalCase[] myCases(@PathParam String username) {
+        return service.myCases(username);
+    }
+
+    @GET
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public MedicalCase getCase(@PathParam Integer id) {

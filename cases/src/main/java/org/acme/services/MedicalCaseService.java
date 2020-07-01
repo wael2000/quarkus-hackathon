@@ -10,6 +10,7 @@ import javax.transaction.Transactional;
 import org.acme.model.MedicalCase;
 import org.acme.model.Report;
 
+
 @ApplicationScoped
 public class MedicalCaseService {
     @Inject
@@ -36,6 +37,12 @@ public class MedicalCaseService {
                   .getResultList().toArray(new MedicalCase[0]);
     }
 
+    public MedicalCase[] myCases(String username){
+        return em.createNamedQuery("Cases.findByUsername", MedicalCase.class)
+                  .setParameter("username",username)
+                  .getResultList().toArray(new MedicalCase[0]);
+    }
+
     public MedicalCase getMedicalCase(Integer id){
         return em.find(MedicalCase.class, id);
     }
@@ -43,6 +50,7 @@ public class MedicalCaseService {
     @Transactional
     public MedicalCase updateMedicalCase(Integer id, MedicalCase updatedMedicalCase){
         MedicalCase medicalCase = em.find(MedicalCase.class, id);
+        System.out.println(id);
         if(medicalCase!=null){
             //medicalCase.setDescription(updatedMedicalCase.getDescription());
             em.merge(updatedMedicalCase);
