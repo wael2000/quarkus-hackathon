@@ -42,10 +42,13 @@ Check swagger documentation on below URL
 http://localhost:8080/swagger-ui/
 
 1 - Create processes instance wiating for assessment as physician is passed 
+
+```sh
 curl -X POST http://localhost:8080/requests \
     -H 'content-type: application/json' \
     -H 'accept: application/json' \
     -d '{"request": { "id":1, "physician" : "Wael" }}'
+```
 
 below is  the process path
 
@@ -57,10 +60,13 @@ below is  the process path
                                       |== Yes ======================|
 
 1 - Create processes instance wiating for physician assignment physician is passed 
+
+```sh
 curl -X POST http://localhost:8080/requests \
     -H 'content-type: application/json' \
     -H 'accept: application/json' \
     -d '{"request": { "id":2}}'
+```
 
 below is  the process path
 
@@ -80,9 +86,12 @@ below is  the process path
 }
 
 4 - we cab query all process instances using 
+
+```sh
 curl -X GET http://localhost:8080/requests \
     -H 'content-type: application/json' \
     -H 'accept: application/json'
+```
 
 expected response 
 
@@ -94,9 +103,11 @@ expected response
 
 5 - to get process tasks 
 
+```sh
 curl -X GET http://localhost:8080/requests/{process-id}/tasks \
     -H 'content-type: application/json' \
     -H 'accept: application/json'
+```
 
 expected response 
 
@@ -105,9 +116,12 @@ b4522309-b5c0-404e-9d1d-0f00b2c5933e: "CaseAssessment"
 }
 
 6 - to get task details 
+
+```sh
 curl -X GET http://localhost:8080/requests/{process-id}/{task-name}/{task-id} \
     -H 'content-type: application/json' \
     -H 'accept: application/json'
+```
 
 example URL: 
 http://localhost:8080/requests/3173ed77-9e5e-4f41-8362-6298af33e0e3/CaseAssessment/b4522309-b5c0-404e-9d1d-0f00b2c5933e
@@ -123,10 +137,13 @@ expected response
 }
 
 7 - to act on a task
+
+```sh
 curl -X POST http://localhost:8080/requests/{process-id}/{task-name}/{task-id} \
     -H 'content-type: application/json' \
     -H 'accept: application/json'
     -d '{ "id": "{task-id}", "name": "AssignPhysician", "request": { "id": 3, "physician" : "Ali", "status": "Assigned"}}'
+```
 
 example
 http://localhost:8080/requests/3173ed77-9e5e-4f41-8362-6298af33e0e3/AssignPhysician/687e14d3-88c2-466d-b5a5-e0dcfd740b8a
