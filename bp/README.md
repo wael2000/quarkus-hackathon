@@ -48,12 +48,12 @@ curl -X POST http://localhost:8080/requests \
     -d '{"request": { "id":1, "physician" : "Wael" }}'
 
 below is  the process path
-                                          [------------------]
-                                  |-- No -| Assign physician |--|
-            [=================]   |       [------------------]  |    [=================]
-{start}====>| check physician |===<>                            <>===| case assessment |==>{end}
-            [=================]   |                             |    [=================]
-                                  |== Yes ======================|
+                                              [------------------]
+                                      |-- No -| Assign physician |--|
+                [=================]   |       [------------------]  |    [=================]
+    {start}====>| check physician |===<>                            <>===| case assessment |==>{end}
+                [=================]   |                             |    [=================]
+                                      |== Yes ======================|
 
 1 - Create processes instance wiating for physician assignment physician is passed 
 curl -X POST http://localhost:8080/requests \
@@ -62,12 +62,12 @@ curl -X POST http://localhost:8080/requests \
     -d '{"request": { "id":2}}'
 
 below is  the process path
-                                          [==================]
-                                  |== No =| Assign physician |==|
-            [=================]   |       [==================]  |    [=================]
-{start}====>| check physician |===<>                            <>===| case assessment |==>{end}
-            [=================]   |                             |    [=================]
-                                  |-- Yes ----------------------|
+                                              [==================]
+                                      |== No =| Assign physician |==|
+                [=================]   |       [==================]  |    [=================]
+    {start}====>| check physician |===<>                            <>===| case assessment |==>{end}
+                [=================]   |                             |    [=================]
+                                      |-- Yes ----------------------|
 
 3 - once a process instance created, below reponse expected
 {
