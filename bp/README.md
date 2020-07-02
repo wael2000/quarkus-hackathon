@@ -48,6 +48,7 @@ curl -X POST http://localhost:8080/requests \
     -d '{"request": { "id":1, "physician" : "Wael" }}'
 
 below is  the process path
+
                                               [------------------]
                                       |-- No -| Assign physician |--|
                 [=================]   |       [------------------]  |    [=================]
@@ -62,6 +63,7 @@ curl -X POST http://localhost:8080/requests \
     -d '{"request": { "id":2}}'
 
 below is  the process path
+
                                               [==================]
                                       |== No =| Assign physician |==|
                 [=================]   |       [==================]  |    [=================]
