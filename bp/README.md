@@ -1,4 +1,4 @@
-# medical case request project
+# medical case business process microservice
 
 This project uses Quarkus, and Kogito to handle the medical case workflow (Process)
 implemenating below process

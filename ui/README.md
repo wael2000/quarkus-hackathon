@@ -1,4 +1,4 @@
-# ui project
+# ui 
 https://account.mapbox.com/access-tokens
 
 This project uses Quarkus, the Supersonic Subatomic Java Framework.

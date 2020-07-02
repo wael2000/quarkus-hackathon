@@ -1,4 +1,4 @@
-# medical case request project
+# medical case request microservice
 https://quarkus.io/guides/hibernate-search-elasticsearch
 https://quarkus.io/guides/hibernate-orm-panache
 
