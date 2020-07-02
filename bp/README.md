@@ -3,12 +3,12 @@
 This project uses Quarkus, and Kogito to handle the medical case workflow (Process)
 implemenating below process
 
-                                          [------------------]
-                                  |-- No -| Assign physician |--|
-            [-----------------]   |       [------------------]  |    [-----------------]
-{start}---->| check physician |---<>                            <>---| case assessment |-->{end}
-            [-----------------]   |                             |    [-----------------]
-                                  |-- Yes ----------------------|
+                                [-------------]
+                        |-- No -| Assign phys |--|
+        [------------]  |       [-------------]  |   [---------------]
+{s}---->| check phys |--<>                       <>--|case assessment|-->{e}
+        [------------]  |                        |   [---------------]
+                        |-- Yes -----------------|
 
 with Built-in OpenAPI specs and Swagger-UI
 
