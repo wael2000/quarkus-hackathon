@@ -18,3 +18,20 @@ Below opensource technologies are used
 mapbox : https://www.mapbox.com/community/
 
 JS bpmn viewer: https://bpmn.io/
+
+# Screenshots
+Login
+![Screenshot](01.png)
+
+Search physicians by specialities
+![Screenshot](02.png)
+
+Search nearby physicians by specialities
+![Screenshot](03.png)
+
+Submit case 
+![Screenshot](04.png)
+
+Review your cases 
+![Screenshot](05.png)
+
