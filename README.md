@@ -10,3 +10,10 @@ Microservices baded Medical case submission portal
 4 - Composite: a simple composite service using proxy and microgateway design patterns
 
 5 - UI: AngularJS using quarkus qute templating engine
+
+6 - Red Hat Single Sign-On (RHSSO)
+
+Below opensource technologies are used 
+
+mapbox : https://www.mapbox.com/community/
+JS bpmn viewer: https://bpmn.io/
