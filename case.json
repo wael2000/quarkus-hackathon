@@ -1,0 +1,21 @@
+{
+        "date": "2020-05-31T20:00:00Z[UTC]",
+        "description": "Stomach111111",
+        "patientDOB": "1975-05-01",
+        "patientGender": "Femaleaaaaaaa",
+        "patientName": "tota Helmy",
+        "patientNationality": "Irish",
+        "reports": [
+        {
+        "type": "PCR test",
+        "link":"http://download.me/r001",
+        "date" : "2020-06-11T20:00:00Z[UTC]"
+        },
+        {
+        "type": "MRI - 01",
+        "link":"http://download.me/r002",
+        "date" : "2020-06-11T20:00:00Z[UTC]"
+        }
+        ],
+        "symptoms": "diarrhea, Gas"
+        }
