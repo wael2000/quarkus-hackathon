@@ -2,7 +2,7 @@
 Microservices baded Medical case submission portal
 # components
 
-![Screenshot](06.png)
+![Screenshot](images/06.png)
 
 1 - Physicians: physician profile service connecting to Mongodb 
 
@@ -24,17 +24,17 @@ JS bpmn viewer: https://bpmn.io/
 
 # Screenshots
 Login
-![Screenshot](01.png)
+![Screenshot](images/01.png)
 
 Search physicians by specialities
-![Screenshot](02.png)
+![Screenshot](images/02.png)
 
 Search nearby physicians by specialities
-![Screenshot](03.png)
+![Screenshot](images/03.png)
 
 Submit case 
-![Screenshot](04.png)
+![Screenshot](images/04.png)
 
 Review your cases 
-![Screenshot](05.png)
+![Screenshot](images/05.png)
 
