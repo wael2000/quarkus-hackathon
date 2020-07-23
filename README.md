@@ -1,6 +1,9 @@
 # quarkus-hackathon
 Microservices baded Medical case submission portal
 # components
+
+![Screenshot](06.png)
+
 1 - Physicians: physician profile service connecting to Mongodb 
 
 2 - Cases: case request service connecting to Postgresql
