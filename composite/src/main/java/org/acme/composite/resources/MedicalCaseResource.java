@@ -1,7 +1,7 @@
 package org.acme.composite.resources;
 
 import java.util.List;
-import java.util.concurrent.CompletionStage;
+import java.util.Map;
 
 import javax.inject.Inject;
 import javax.ws.rs.GET;
@@ -13,13 +13,10 @@ import javax.ws.rs.core.MediaType;
 import org.eclipse.microprofile.rest.client.inject.RestClient;
 import org.jboss.resteasy.annotations.jaxrs.PathParam;
 
-import io.smallrye.mutiny.Uni;
 import org.acme.composite.service.PhysicianService;
 import org.acme.composite.service.MedicalCaseService;
 import org.acme.composite.service.ProcessService;
-import org.acme.composite.model.PhysicianProfile;
 import org.acme.model.MedicalCase;
-import org.acme.model.Report;
 import org.acme.kogito.model.Request;
 import org.acme.composite.model.CaseRequest;
 
@@ -52,7 +49,16 @@ public class MedicalCaseResource {
     @Path("/process/{id}")
     @Produces("application/json")
     public CaseRequest getProcess(@PathParam String id){
-        return processService.getProcess(id);
+        CaseRequest request =  processService.getProcess(id);
+        request.tasks = processService.getTasks(id);
+        return request;
+    }
+
+    @GET
+    @Path("/process/{id}/tasks")
+    @Produces("application/json")
+    public Map<String,String> getTasks(@PathParam String id){
+        return processService.getTasks(id);
     }
     
     @GET

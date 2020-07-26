@@ -157,7 +157,8 @@
                 popupContent = popupContent.replace(/physician.id/g,physician.id);
                 popupContent= popupContent.replace(/physician.name/g,physician.name);
                 popupContent= popupContent.replace(/physician.speciality/g,physician.speciality);
-                popupContent= popupContent.replace(/physician.qualifications/g,physician.qualifications);                
+                popupContent= popupContent.replace(/physician.qualifications/g,physician.qualifications);
+                popupContent= popupContent.replace(/physician.image/g,physician.image);
                 L.marker(physician.address.location.coordinates).addTo(layerGroup)
                     .bindPopup(popupContent)
                     .openPopup();
@@ -361,7 +362,7 @@
 
             <div id="physiciantemplate" style="display: none;">
               <div class="card">
-                <img src="img/physician.id.jpg"  class="center w-75 rounded-circle card-img-top shadow-sm bg-white rounded" alt="..." >
+                <img src="img/physician.image"  class="center w-75 rounded-circle card-img-top shadow-sm bg-white rounded" alt="..." >
                 <div class="card-body" style="padding-top:0em">
                   <h5 class="card-title text-capitalize">physician.name</h5>
                   <p class="small">

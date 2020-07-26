@@ -1,5 +1,5 @@
 var diagramUrl = 'bpmn/requests.bpmn2';
-
+var currentTask;
 // viewer instance
 var bpmnViewer = new BpmnJS({
     container: '#canvas',
@@ -11,7 +11,6 @@ var bpmnViewer = new BpmnJS({
       }
 });
 
-var overlays = bpmnViewer.get('overlays');
 
 function processState(state){
     var overlays = bpmnViewer.get('overlays');
@@ -42,26 +41,20 @@ async function openDiagram(bpmnXML) {
         await bpmnViewer.importXML(bpmnXML);
         // access viewer components
         var canvas = bpmnViewer.get('canvas');
-        var overlays = bpmnViewer.get('overlays');
-
         // zoom to fit full viewport
         canvas.zoom('fit-viewport');
-        console.log(overlays);
-        // attach an overlay to a node
-        
-        /*
-        overlays.add('START_PROCESS', 'note', {
-        position: {
-            bottom: 0,
-            right: 0
-        },
-        html: '<div class="diagram-note">Mixed up the labels?</div>'
-        });*/
-
+        if(currentTask == "AssignPhysician")
+            currentTask = "UserTask_1";
+        else if(currentTask == "CaseAssessment")
+            currentTask = "_A1D986A5-B892-4AC7-915F-6F6E16ADD7EE";
+        else 
+            currentTask = "";
+        // UserTask_1 : assign physician
+        // _A1D986A5-B892-4AC7-915F-6F6E16ADD7EE : case assessment
+        canvas.addMarker(currentTask, 'highlight');        
         // add marker
-        //canvas.addMarker('SCAN_OK', 'needs-discussion');
+        // canvas.addMarker('SCAN_OK', 'needs-discussion');
     } catch (err) {
-
         console.error('could not import BPMN 2.0 diagram', err);
     }
 }

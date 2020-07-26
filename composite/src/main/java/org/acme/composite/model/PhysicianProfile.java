@@ -19,6 +19,7 @@ public class PhysicianProfile {
     public List<String> publications;
     public List<String> memberships;
     public Map address;
+    public String image;
 
     public List<org.acme.model.MedicalCase> cases;
        

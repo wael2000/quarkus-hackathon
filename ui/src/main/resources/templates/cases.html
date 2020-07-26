@@ -35,8 +35,16 @@
         }
         .fixedHeight{
           height: 300px;overflow-y: scroll;max-height:300px;  
-        }        
-    </style>
+        }  
+        .highlight-overlay {
+          background-color: green; /* color elements as green */
+          opacity: 0.4;
+          pointer-events: none; /* no pointer events, allows clicking through onto the element */
+        }      
+        .highlight:not(.djs-connection) .djs-visual > :nth-child(1) {
+          fill: lightgreen !important; /* color elements as green */
+        }
+      </style>
     <script type="text/javascript">
         var app = angular.module("PhysicianManagement", []);
         app.controller("PhysicianManagementController", function ($scope, $http) {
@@ -71,6 +79,9 @@
               }
             }).then(function successCallback(response) {
               $scope.process = response.data;
+              for(task in $scope.process.tasks)
+                currentTask = $scope.process.tasks[task];
+              $.get(diagramUrl, openDiagram, 'text');
             }, function errorCallback(response) {
               console.log(response.statusText);
             });           
@@ -145,7 +156,7 @@
                     {{ case.patientGender }} 
                   </td>
                   <td>
-                    {{ case.patientDOB }} 
+                    {{ case.patientDOB | date }} 
                   </td>
                   <td>
                     <button class="btn" ng-click="showProcess(case.processId)">details</button>
@@ -153,8 +164,16 @@
                 </tr>
                 </tbody>
             </table>
+            <h2>Process details</h2>
+            <table class="table table-responsive-sm"> 
+              <tr><td> Status</td><td> {{ process.request.status }} </td>
+              <td rowspan="2"> <div id="canvas"></div> </td> </tr>
+              <tr><td> Current Task</td><td>
+              <span ng-repeat="task in process.tasks"> {{ task }} </span>  </td></tr>
+            </table>
+            
+            <script src="js/bpmn-viewer.js"></script>
 
-            <div class="alert alert-success"> Status : {{ process.request.status }} </div>
 
             </div>
             <div class="col-md-1"></div>

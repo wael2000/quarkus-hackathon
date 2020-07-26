@@ -70,6 +70,7 @@ public class Physician extends PanacheMongoEntity {
     public List<String> publications;
     public List<String> memberships;
     public Map address;
+    public String image;
     /** address 
     {
         "country": "UAE",
