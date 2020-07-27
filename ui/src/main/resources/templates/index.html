@@ -34,8 +34,9 @@
         }        
     </style>
     <script type="text/javascript">
-        $.when( $.ready ).then(function() {
-        });
+        function newCase(physician){
+          window.location = 'case?id=' + physician;
+        }
         
         var app = angular.module("PhysicianManagement", []);
         app.controller("PhysicianManagementController", function ($scope, $http) {
@@ -265,7 +266,8 @@
                     </span>
                     <hr/>
                     <div>
-                      <a class="btn btn-info btn-sm" href="case?id={{physician.id}}">new case</a>
+                      <a class="btn btn-info btn-sm" href="case?id={{ physician.id }}">new case</a>
+                      
                     </div>
                   </div>
                   <div class="col-md-8">

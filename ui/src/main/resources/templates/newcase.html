@@ -49,8 +49,7 @@
             var results = regex.exec(location.search);
             return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
         };
-        var urlParams = new URLSearchParams(window.location.search);
-
+        var urlParams = new URLSearchParams(window.location.search);            
         $.when( $.ready ).then(function() {
           $("#alert").hide();
         });
@@ -69,7 +68,8 @@
             email: ""
           };
 
-          _refreshPageData();
+          if(urlParams.get("id") != null)
+            _refreshPageData();
           
           function _refreshPageData() {
             var method = "GET";
@@ -83,6 +83,7 @@
               }
             }).then(function successCallback(response) {
               $scope.selectedPhysician = response.data;
+              $("#physicianCard").show();
             }, function errorCallback(response) {
               console.log(response.statusText);
             });
@@ -97,11 +98,7 @@
               url = '{composite}/cases';
               data = $scope.form;
               data.username = '{username}';
-            } else {
-              method = "PUT";
-              url = '/gifts/' + $scope.form.id;
-              data.name = $scope.form.name;
-            }
+            } 
 
             $http({
               method: method,
@@ -114,6 +111,7 @@
           };
 
           function _success(response) {
+            $("#canvas").show();
             $("#alert").show();
             _clearForm()
             _refreshPageData();
@@ -185,7 +183,7 @@
 
             <div class="row">
             <div class="col-md-5">
-            <div class="card bg-light mb-3">
+            <div class="card bg-light mb-3" id="physicianCard" style="display: none;">
                 <div class="row no-gutters">
                   <div class="col-md-4 text-center small">
                     <img src="img/{{selectedPhysician.image}}" class="rounded-circle card-img-top shadow-sm bg-white p-1 mb-1 rounded" alt="..." >
@@ -271,7 +269,7 @@
               This message will auto disappear in 10 seconds
             </div>
 
-            <div id="canvas"></div>
+            <div id="canvas" style="display: none"></div>
             <script src="js/bpmn-viewer.js"></script>
 
             </div>
