@@ -1,5 +1,5 @@
 # quarkus-hackathon
-Microservices baded Medical case submission portal
+Microservices based Medical case submission portal
 # components
 
 ![Screenshot](images/06.png)
