@@ -8,7 +8,7 @@ Quarkus guide: https://quarkus.io/guides/mongodb-panache
 
 1 - to create new physician record
 
-curl -X POST http://localhost:8080/physician \
+curl -X POST http://physicians-quarkus.apps.cluster-tii-4001.tii-4001.example.opentlc.com/physician \
     -H 'content-type: application/json' \
     -H 'accept: application/json' \
     -d  '{
